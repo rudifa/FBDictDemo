@@ -8,12 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		9D3B04FC2C98DAF200B23E8C /* FBDictDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B04FB2C98DAF200B23E8C /* FBDictDemoApp.swift */; };
-		9D3B04FE2C98DAF200B23E8C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B04FD2C98DAF200B23E8C /* ContentView.swift */; };
 		9D3B05002C98DAF800B23E8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D3B04FF2C98DAF800B23E8C /* Assets.xcassets */; };
 		9D3B05032C98DAF800B23E8C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D3B05022C98DAF800B23E8C /* Preview Assets.xcassets */; };
 		9D3B050D2C98DAF900B23E8C /* FBDictDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B050C2C98DAF900B23E8C /* FBDictDemoTests.swift */; };
 		9D3B05172C98DAFA00B23E8C /* FBDictDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B05162C98DAFA00B23E8C /* FBDictDemoUITests.swift */; };
 		9D3B05192C98DAFA00B23E8C /* FBDictDemoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B05182C98DAFA00B23E8C /* FBDictDemoUITestsLaunchTests.swift */; };
+		9D3B05282C98DCE900B23E8C /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B05252C98DCE900B23E8C /* CameraView.swift */; };
+		9D3B05292C98DCE900B23E8C /* PhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B05262C98DCE900B23E8C /* PhotosView.swift */; };
+		9D3B052A2C98DCE900B23E8C /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B05272C98DCE900B23E8C /* CameraViewModel.swift */; };
+		9D3B052C2C98DD5000B23E8C /* UIImageCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B052B2C98DD5000B23E8C /* UIImageCodable.swift */; };
+		9D3B052E2C98DDB800B23E8C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B052D2C98DDB800B23E8C /* ContentView.swift */; };
+		9D3B05312C98DE1F00B23E8C /* RudifaUtilPkg in Frameworks */ = {isa = PBXBuildFile; productRef = 9D3B05302C98DE1F00B23E8C /* RudifaUtilPkg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +41,6 @@
 /* Begin PBXFileReference section */
 		9D3B04F82C98DAF200B23E8C /* FBDictDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBDictDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D3B04FB2C98DAF200B23E8C /* FBDictDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBDictDemoApp.swift; sourceTree = "<group>"; };
-		9D3B04FD2C98DAF200B23E8C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9D3B04FF2C98DAF800B23E8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D3B05022C98DAF800B23E8C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9D3B05082C98DAF900B23E8C /* FBDictDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FBDictDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +48,12 @@
 		9D3B05122C98DAF900B23E8C /* FBDictDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FBDictDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D3B05162C98DAFA00B23E8C /* FBDictDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBDictDemoUITests.swift; sourceTree = "<group>"; };
 		9D3B05182C98DAFA00B23E8C /* FBDictDemoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBDictDemoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9D3B05252C98DCE900B23E8C /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		9D3B05262C98DCE900B23E8C /* PhotosView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosView.swift; sourceTree = "<group>"; };
+		9D3B05272C98DCE900B23E8C /* CameraViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
+		9D3B052B2C98DD5000B23E8C /* UIImageCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageCodable.swift; sourceTree = "<group>"; };
+		9D3B052D2C98DDB800B23E8C /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9D3B05322C98DF7100B23E8C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D3B05312C98DE1F00B23E8C /* RudifaUtilPkg in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +85,7 @@
 		9D3B04EF2C98DAF200B23E8C = {
 			isa = PBXGroup;
 			children = (
+				9D3B05322C98DF7100B23E8C /* README.md */,
 				9D3B04FA2C98DAF200B23E8C /* FBDictDemo */,
 				9D3B050B2C98DAF900B23E8C /* FBDictDemoTests */,
 				9D3B05152C98DAF900B23E8C /* FBDictDemoUITests */,
@@ -94,8 +106,12 @@
 		9D3B04FA2C98DAF200B23E8C /* FBDictDemo */ = {
 			isa = PBXGroup;
 			children = (
+				9D3B052D2C98DDB800B23E8C /* ContentView.swift */,
+				9D3B052B2C98DD5000B23E8C /* UIImageCodable.swift */,
+				9D3B05252C98DCE900B23E8C /* CameraView.swift */,
+				9D3B05272C98DCE900B23E8C /* CameraViewModel.swift */,
+				9D3B05262C98DCE900B23E8C /* PhotosView.swift */,
 				9D3B04FB2C98DAF200B23E8C /* FBDictDemoApp.swift */,
-				9D3B04FD2C98DAF200B23E8C /* ContentView.swift */,
 				9D3B04FF2C98DAF800B23E8C /* Assets.xcassets */,
 				9D3B05012C98DAF800B23E8C /* Preview Content */,
 			);
@@ -143,6 +159,9 @@
 			dependencies = (
 			);
 			name = FBDictDemo;
+			packageProductDependencies = (
+				9D3B05302C98DE1F00B23E8C /* RudifaUtilPkg */,
+			);
 			productName = FBDictDemo;
 			productReference = 9D3B04F82C98DAF200B23E8C /* FBDictDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +234,9 @@
 				Base,
 			);
 			mainGroup = 9D3B04EF2C98DAF200B23E8C;
+			packageReferences = (
+				9D3B052F2C98DE1F00B23E8C /* XCRemoteSwiftPackageReference "RudifaUtilPkg" */,
+			);
 			productRefGroup = 9D3B04F92C98DAF200B23E8C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -257,8 +279,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D3B04FE2C98DAF200B23E8C /* ContentView.swift in Sources */,
 				9D3B04FC2C98DAF200B23E8C /* FBDictDemoApp.swift in Sources */,
+				9D3B052A2C98DCE900B23E8C /* CameraViewModel.swift in Sources */,
+				9D3B052E2C98DDB800B23E8C /* ContentView.swift in Sources */,
+				9D3B052C2C98DD5000B23E8C /* UIImageCodable.swift in Sources */,
+				9D3B05282C98DCE900B23E8C /* CameraView.swift in Sources */,
+				9D3B05292C98DCE900B23E8C /* PhotosView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +451,7 @@
 				DEVELOPMENT_TEAM = LHA84NAPNA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app wants to usew the camera  to take photos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -454,6 +481,7 @@
 				DEVELOPMENT_TEAM = LHA84NAPNA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app wants to usew the camera  to take photos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -588,6 +616,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9D3B052F2C98DE1F00B23E8C /* XCRemoteSwiftPackageReference "RudifaUtilPkg" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rudifa/RudifaUtilPkg";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9D3B05302C98DE1F00B23E8C /* RudifaUtilPkg */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9D3B052F2C98DE1F00B23E8C /* XCRemoteSwiftPackageReference "RudifaUtilPkg" */;
+			productName = RudifaUtilPkg;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9D3B04F02C98DAF200B23E8C /* Project object */;
 }
