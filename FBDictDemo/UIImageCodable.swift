@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// A struct to make `UIImage` conform to `Codable` protocol.
 struct UIImageCodable: Codable {
     let image: UIImage
 
@@ -22,7 +23,7 @@ struct UIImageCodable: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let imageData = try container.decode(Data.self, forKey: .imageData)
         guard let image = UIImage(data: imageData) else {
-            throw DecodingError.dataCorruptedError(forKey: .imageData, in: container, debugDescription: "Data could not be converted to UIImage")
+            throw DecodingError.dataCorruptedError(forKey: .imageData, in: container, debugDescription: "Data could not be converted to UIImage.")
         }
         self.image = image
     }
@@ -30,7 +31,7 @@ struct UIImageCodable: Codable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         guard let imageData = image.pngData() else {
-            throw EncodingError.invalidValue(image, EncodingError.Context(codingPath: encoder.codingPath, debugDescription: "UIImage could not be converted to Data"))
+            throw EncodingError.invalidValue(image, EncodingError.Context(codingPath: encoder.codingPath, debugDescription: "UIImage could not be converted to Data."))
         }
         try container.encode(imageData, forKey: .imageData)
     }

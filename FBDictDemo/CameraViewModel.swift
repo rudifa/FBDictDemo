@@ -12,7 +12,8 @@ class CameraViewModel: NSObject, ObservableObject {
     private var currentCameraPosition: AVCaptureDevice.Position = .back
 
     func startSession() {
-        if session != nil {
+        guard session == nil else {
+            printt("startSession: session already exists")
             return
         }
 
@@ -20,17 +21,29 @@ class CameraViewModel: NSObject, ObservableObject {
         sessionStarted = true // Added to track session start
         session?.sessionPreset = .photo
 
-        guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front) else { return }
-        guard let input = try? AVCaptureDeviceInput(device: device) else { return }
+        guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front) else {
+            printt("startSession: failed to get camera device")
+            return
+        }
+        guard let input = try? AVCaptureDeviceInput(device: device) else {
+            printt("startSession: failed to create camera input")
+            return
+        }
 
         output = AVCapturePhotoOutput()
 
-        if session?.canAddInput(input) == true {
-            session?.addInput(input)
-        }
+        if let session {
+            if session.canAddInput(input) {
+                session.addInput(input)
+            } else {
+                printt("startSession: failed to add input to session")
+            }
 
-        if session?.canAddOutput(output!) == true {
-            session?.addOutput(output!)
+            if session.canAddOutput(output!) {
+                session.addOutput(output!)
+            } else {
+                printt("startSession: failed to add output to session")
+            }
         }
 
         DispatchQueue.global(qos: .background).async {
@@ -41,7 +54,11 @@ class CameraViewModel: NSObject, ObservableObject {
 
     func capturePhoto() {
         let settings = AVCapturePhotoSettings()
-        output?.capturePhoto(with: settings, delegate: self)
+        guard let output else {
+            printt("capturePhoto: output is nil")
+            return
+        }
+        output.capturePhoto(with: settings, delegate: self)
     }
 
     func clearPhoto() {
@@ -49,15 +66,16 @@ class CameraViewModel: NSObject, ObservableObject {
     }
 
     func savePhoto() {
-        if let image = capturedImage, savedPhotos.count < 120 {
-            // let croppedImage = image.cropToSquare() ?? image
-            let croppedImage = image
-
-            let key = String(format: "image%03d", savedPhotos.count)
-            savedPhotos[key] = UIImageCodable(image: croppedImage)
-            printt("savedPhoto: \(key) \(image.size) -> \(croppedImage.size)")
-            clearPhoto()
+        guard let image = capturedImage, savedPhotos.count < 120 else {
+            printt("savePhoto: No image to save or limit reached")
+            return
         }
+
+        let croppedImage = image
+        let key = String(format: "image%03d", savedPhotos.count)
+        savedPhotos[key] = UIImageCodable(image: croppedImage)
+        printt("savedPhoto: \(key) \(image.size) -> \(croppedImage.size)")
+        clearPhoto()
     }
 
     func clearAllPhotos() {
@@ -65,16 +83,28 @@ class CameraViewModel: NSObject, ObservableObject {
     }
 
     func swapCamera() {
-        guard let session else { return }
+        guard let session else {
+            printt("swapCamera: session is nil")
+            return
+        }
         session.beginConfiguration()
 
         // Remove existing input
-        guard let currentInput = session.inputs.first as? AVCaptureDeviceInput else { return }
+        guard let currentInput = session.inputs.first as? AVCaptureDeviceInput else {
+            printt("swapCamera: current input is nil")
+            session.commitConfiguration()
+            return
+        }
         session.removeInput(currentInput)
 
         // Get new camera
         let newCameraPosition: AVCaptureDevice.Position = currentCameraPosition == .back ? .front : .back
-        guard let newCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: newCameraPosition) else { return }
+        guard let newCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: newCameraPosition) else {
+            printt("swapCamera: new camera is nil")
+            session.addInput(currentInput) // Revert to the original input on error
+            session.commitConfiguration()
+            return
+        }
 
         // Add new input
         do {
@@ -91,13 +121,24 @@ class CameraViewModel: NSObject, ObservableObject {
 }
 
 extension CameraViewModel: AVCapturePhotoCaptureDelegate {
-    func photoOutput(_: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error _: Error?) {
-        guard let data = photo.fileDataRepresentation() else { return }
+    func photoOutput(_: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        if let error {
+            printt("Error processing photo: \(error.localizedDescription)")
+            return
+        }
+
+        guard let data = photo.fileDataRepresentation() else {
+            printt("Failed to get photo data representation")
+            return
+        }
+
         DispatchQueue.main.async {
             if let image = UIImage(data: data) {
                 let croppedImage = image.cropToSquare() ?? image
                 printt("photoOutput: \(image.size) -> \(croppedImage.size)")
                 self.capturedImage = croppedImage
+            } else {
+                printt("Failed to create UIImage from photo data")
             }
         }
     }

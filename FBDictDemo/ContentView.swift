@@ -4,46 +4,47 @@ struct ContentView: View {
     @StateObject private var viewModel = CameraViewModel()
     @State private var showPhotosView = false
 
+    private let fixedSize: CGFloat = 300
+    private let buttonPadding: CGFloat = 10
+    private let buttonCornerRadius: CGFloat = 10
+
     var body: some View {
         NavigationView {
             VStack {
                 ZStack {
-                    let fixedSize: CGFloat = 300 // Fixed size for the preview and captured photo
-
                     GeometryReader { geometry in
-
                         if viewModel.sessionStarted {
                             CameraView(viewModel: viewModel, frameSize: CGSize(width: fixedSize, height: fixedSize))
                                 .frame(width: fixedSize, height: fixedSize)
-                                .position(x: geometry.size.width / 2, y: geometry.size.height / 2) // Center the camera view
+                                .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
                                 .opacity(viewModel.capturedImage == nil ? 1 : 0)
                         }
 
                         if let image = viewModel.capturedImage {
                             Image(uiImage: image)
                                 .resizable()
-                                .aspectRatio(1, contentMode: .fit) // Ensure the aspect ratio is 1:1
+                                .aspectRatio(1, contentMode: .fit)
                                 .frame(width: fixedSize, height: fixedSize)
-                                .position(x: geometry.size.width / 2, y: geometry.size.height / 2) // Center the image
+                                .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
                                 .clipped()
                                 .onAppear {
                                     printt("ZStack.onAppear image.size \(image.size)")
                                 }
                         }
                     }
-                    .frame(width: fixedSize, height: fixedSize) // Set a fixed frame for the GeometryReader
+                    .frame(width: fixedSize, height: fixedSize)
                 }
-                Spacer() // Pushes the HStack to the bottom
+                Spacer()
 
                 HStack {
                     Button(action: {
                         viewModel.clearPhoto()
                     }) {
                         Text("Clear")
-                            .padding()
+                            .padding(buttonPadding)
                             .background(Color.red)
                             .foregroundColor(.white)
-                            .cornerRadius(10)
+                            .cornerRadius(buttonCornerRadius)
                             .frame(maxWidth: .infinity)
                     }
                     .opacity(viewModel.capturedImage == nil ? 0 : 1)
@@ -52,10 +53,10 @@ struct ContentView: View {
                         viewModel.capturePhoto()
                     }) {
                         Text("Click")
-                            .padding()
+                            .padding(buttonPadding)
                             .background(Color.blue)
                             .foregroundColor(.white)
-                            .cornerRadius(10)
+                            .cornerRadius(buttonCornerRadius)
                             .frame(maxWidth: .infinity)
                     }
 
@@ -64,10 +65,10 @@ struct ContentView: View {
                             viewModel.swapCamera()
                         }) {
                             Text("🔄")
-                                .padding()
+                                .padding(buttonPadding)
                                 .background(Color.gray)
                                 .foregroundColor(.white)
-                                .cornerRadius(10)
+                                .cornerRadius(buttonCornerRadius)
                                 .frame(maxWidth: .infinity)
                         }
                         .opacity(viewModel.capturedImage == nil ? 1 : 0)
@@ -76,10 +77,10 @@ struct ContentView: View {
                             viewModel.savePhoto()
                         }) {
                             Text("Save")
-                                .padding()
+                                .padding(buttonPadding)
                                 .background(Color.green)
                                 .foregroundColor(.white)
-                                .cornerRadius(10)
+                                .cornerRadius(buttonCornerRadius)
                                 .frame(maxWidth: .infinity)
                         }
                         .opacity(viewModel.capturedImage == nil ? 0 : 1)
@@ -89,17 +90,17 @@ struct ContentView: View {
                         showPhotosView = true
                     }) {
                         Text("Show")
-                            .padding()
+                            .padding(buttonPadding)
                             .background(Color.orange)
                             .foregroundColor(.white)
-                            .cornerRadius(10)
+                            .cornerRadius(buttonCornerRadius)
                             .frame(maxWidth: .infinity)
                     }
                     .sheet(isPresented: $showPhotosView) {
                         PhotosView(viewModel: viewModel)
                     }
                 }
-                .padding() // Add padding around the HStack
+                .padding()
             }
             .onAppear {
                 printt("ContentView VStack.onAppear -> startSession")
