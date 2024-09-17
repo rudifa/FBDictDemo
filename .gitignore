@@ -1,0 +1,6 @@
+# see also https://github.com/github/gitignore/blob/master/Global/Xcode.gitignore
+
+.DS_Store
+xcuserdata/
+.xcodesamplecode.plist
+*.xcbkptlist

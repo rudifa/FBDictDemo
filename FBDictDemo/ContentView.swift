@@ -1,93 +1,118 @@
-//
-//  ContentView.swift
-//  test-pkg-access
-//
-//  Created by Rudolf Farkas on 16.09.24.
-//
-
 import SwiftUI
 
-// Main Content View
 struct ContentView: View {
     @StateObject private var viewModel = CameraViewModel()
     @State private var showPhotosView = false
 
+    private let fixedSize: CGFloat = 300
+    private let buttonPadding: CGFloat = 10
+    private let buttonCornerRadius: CGFloat = 10
+
     var body: some View {
         NavigationView {
             VStack {
-                GeometryReader { geometry in
-                    ZStack {
-                        CameraView(viewModel: viewModel)
-                            .frame(width: geometry.size.width, height: geometry.size.height)
-                            .opacity(viewModel.capturedImage == nil ? 1 : 0)
+                Spacer()
+                ZStack {
+                    GeometryReader { geometry in
+                        if viewModel.sessionStarted {
+                            CameraView(viewModel: viewModel, frameSize: CGSize(width: fixedSize, height: fixedSize))
+                                .frame(width: fixedSize, height: fixedSize)
+                                .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+                                .opacity(viewModel.capturedImage == nil ? 1 : 0)
+                        }
 
                         if let image = viewModel.capturedImage {
                             Image(uiImage: image)
                                 .resizable()
-                                .scaledToFit()
-                                .frame(width: geometry.size.width, height: geometry.size.height)
+                                .aspectRatio(1, contentMode: .fit)
+                                .frame(width: fixedSize, height: fixedSize)
+                                .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
                                 .clipped()
+                                .onAppear {
+                                    printt("ZStack.onAppear image.size \(image.size)")
+                                }
                         }
                     }
+                    .frame(width: fixedSize, height: fixedSize)
                 }
-                .frame(height: 300) // Set a fixed height for the preview and captured photo
+                Spacer()
+                Spacer()
+                HStack {
+                    Button(action: {
+                        viewModel.clearPhoto()
+                    }) {
+                        Text("Clear")
+                            .padding(buttonPadding)
+                            .background(Color.red)
+                            .foregroundColor(.white)
+                            .cornerRadius(buttonCornerRadius)
+                            .frame(maxWidth: .infinity)
+                    }
+                    .opacity(viewModel.capturedImage == nil ? 0 : 1)
 
-                if let _ = viewModel.capturedImage {
-                    HStack {
+                    Button(action: {
+                        viewModel.capturePhoto()
+                    }) {
+                        Text("Click")
+                            .padding(buttonPadding)
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(buttonCornerRadius)
+                            .frame(maxWidth: .infinity)
+                    }
+
+                    ZStack {
                         Button(action: {
-                            viewModel.clearPhoto()
+                            viewModel.swapCamera()
                         }) {
-                            Text("Clear Photo")
-                                .padding()
-                                .background(Color.red)
+                            Text("🔄")
+                                .padding(buttonPadding)
+                                .background(Color.gray)
                                 .foregroundColor(.white)
-                                .cornerRadius(10)
+                                .cornerRadius(buttonCornerRadius)
+                                .frame(maxWidth: .infinity)
                         }
+                        .opacity(viewModel.capturedImage == nil ? 1 : 0)
 
                         Button(action: {
                             viewModel.savePhoto()
                         }) {
-                            Text("Save Photo")
-                                .padding()
+                            Text("Save")
+                                .padding(buttonPadding)
                                 .background(Color.green)
                                 .foregroundColor(.white)
-                                .cornerRadius(10)
+                                .cornerRadius(buttonCornerRadius)
+                                .frame(maxWidth: .infinity)
                         }
+                        .opacity(viewModel.capturedImage == nil ? 0 : 1)
+                    }
+
+                    Button(action: {
+                        showPhotosView = true
+                    }) {
+                        Text("Show")
+                            .padding(buttonPadding)
+                            .background(Color.orange)
+                            .foregroundColor(.white)
+                            .cornerRadius(buttonCornerRadius)
+                            .frame(maxWidth: .infinity)
+                    }
+                    .sheet(isPresented: $showPhotosView) {
+                        PhotosView(viewModel: viewModel)
                     }
                 }
-
-                Button(action: {
-                    viewModel.capturePhoto()
-                }) {
-                    Text("Capture Photo")
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-
-                Button(action: {
-                    showPhotosView = true
-                }) {
-                    Text("Photos")
-                        .padding()
-                        .background(Color.orange)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                .sheet(isPresented: $showPhotosView) {
-                    PhotosView(viewModel: viewModel)
-                }
+                .padding()
             }
             .onAppear {
+                printt("ContentView VStack.onAppear -> startSession")
                 viewModel.startSession()
             }
-            .navigationTitle("Camera")
+            .navigationTitle("Camera!")
+            .background(GradientBackgroundView())
         }
     }
 }
 
-// Preview
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()

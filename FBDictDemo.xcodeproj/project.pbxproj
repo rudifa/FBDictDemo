@@ -19,6 +19,9 @@
 		9D3B052C2C98DD5000B23E8C /* UIImageCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B052B2C98DD5000B23E8C /* UIImageCodable.swift */; };
 		9D3B052E2C98DDB800B23E8C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B052D2C98DDB800B23E8C /* ContentView.swift */; };
 		9D3B05312C98DE1F00B23E8C /* RudifaUtilPkg in Frameworks */ = {isa = PBXBuildFile; productRef = 9D3B05302C98DE1F00B23E8C /* RudifaUtilPkg */; };
+		9D3B05342C9993CA00B23E8C /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B05332C9993CA00B23E8C /* Util.swift */; };
+		9D8C63E72C9A0D3E004BCB67 /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8C63E62C9A0D3E004BCB67 /* GradientBackgroundView.swift */; };
+		9D8C63E92C9A10BD004BCB67 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8C63E82C9A10BD004BCB67 /* SplashScreenView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +57,9 @@
 		9D3B052B2C98DD5000B23E8C /* UIImageCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageCodable.swift; sourceTree = "<group>"; };
 		9D3B052D2C98DDB800B23E8C /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9D3B05322C98DF7100B23E8C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		9D3B05332C9993CA00B23E8C /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		9D8C63E62C9A0D3E004BCB67 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
+		9D8C63E82C9A10BD004BCB67 /* SplashScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,14 +112,17 @@
 		9D3B04FA2C98DAF200B23E8C /* FBDictDemo */ = {
 			isa = PBXGroup;
 			children = (
+				9D8C63E82C9A10BD004BCB67 /* SplashScreenView.swift */,
+				9D8C63E62C9A0D3E004BCB67 /* GradientBackgroundView.swift */,
 				9D3B052D2C98DDB800B23E8C /* ContentView.swift */,
-				9D3B052B2C98DD5000B23E8C /* UIImageCodable.swift */,
 				9D3B05252C98DCE900B23E8C /* CameraView.swift */,
 				9D3B05272C98DCE900B23E8C /* CameraViewModel.swift */,
 				9D3B05262C98DCE900B23E8C /* PhotosView.swift */,
 				9D3B04FB2C98DAF200B23E8C /* FBDictDemoApp.swift */,
 				9D3B04FF2C98DAF800B23E8C /* Assets.xcassets */,
+				9D3B052B2C98DD5000B23E8C /* UIImageCodable.swift */,
 				9D3B05012C98DAF800B23E8C /* Preview Content */,
+				9D3B05332C9993CA00B23E8C /* Util.swift */,
 			);
 			path = FBDictDemo;
 			sourceTree = "<group>";
@@ -281,8 +290,11 @@
 			files = (
 				9D3B04FC2C98DAF200B23E8C /* FBDictDemoApp.swift in Sources */,
 				9D3B052A2C98DCE900B23E8C /* CameraViewModel.swift in Sources */,
+				9D8C63E92C9A10BD004BCB67 /* SplashScreenView.swift in Sources */,
 				9D3B052E2C98DDB800B23E8C /* ContentView.swift in Sources */,
+				9D8C63E72C9A0D3E004BCB67 /* GradientBackgroundView.swift in Sources */,
 				9D3B052C2C98DD5000B23E8C /* UIImageCodable.swift in Sources */,
+				9D3B05342C9993CA00B23E8C /* Util.swift in Sources */,
 				9D3B05282C98DCE900B23E8C /* CameraView.swift in Sources */,
 				9D3B05292C98DCE900B23E8C /* PhotosView.swift in Sources */,
 			);
