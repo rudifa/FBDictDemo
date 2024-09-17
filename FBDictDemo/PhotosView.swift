@@ -13,18 +13,27 @@ struct PhotosView: View {
 
     var body: some View {
         VStack {
-            ScrollView {
-                LazyVGrid(columns: gridColumns, spacing: gridSpacing) {
-                    ForEach(viewModel.savedPhotos.keys.sorted(), id: \.self) { key in
-                        if let photoCodable = viewModel.savedPhotos[key] {
-                            Image(uiImage: photoCodable.image)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: imageSize, height: imageSize)
+            ScrollViewReader { scrollViewProxy in
+                ScrollView {
+                    LazyVGrid(columns: gridColumns, spacing: gridSpacing) {
+                        ForEach(viewModel.savedPhotos.keys.sorted(), id: \.self) { key in
+                            if let photoCodable = viewModel.savedPhotos[key] {
+                                Image(uiImage: photoCodable.image)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: imageSize, height: imageSize)
+                                    .id(key) // Assign an ID to each image
+                            }
                         }
                     }
+                    .padding()
                 }
-                .padding()
+                .onAppear {
+                    // Scroll to the last photo when the view appears
+                    if let lastKey = viewModel.savedPhotos.keys.sorted().last {
+                        scrollViewProxy.scrollTo(lastKey, anchor: .bottom)
+                    }
+                }
             }
 
             HStack {
