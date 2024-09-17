@@ -3,6 +3,7 @@ import SwiftUI
 struct PhotosView: View {
     @ObservedObject var viewModel: CameraViewModel
     @Environment(\.presentationMode) var presentationMode
+    @State private var showAlert = false
 
     var body: some View {
         VStack {
@@ -20,14 +21,36 @@ struct PhotosView: View {
                 .padding()
             }
 
-            Button(action: {
-                presentationMode.wrappedValue.dismiss()
-            }) {
-                Text("Close")
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+            HStack {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Text("Close")
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+
+                Button(action: {
+                    showAlert = true
+                }) {
+                    Text("Clear All")
+                        .padding()
+                        .background(Color.red)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("Are you sure?"),
+                        message: Text("This will remove all saved photos."),
+                        primaryButton: .destructive(Text("Clear All")) {
+                            viewModel.clearAllPhotos()
+                        },
+                        secondaryButton: .cancel()
+                    )
+                }
             }
             .padding()
         }
