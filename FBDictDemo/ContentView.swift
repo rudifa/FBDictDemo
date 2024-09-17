@@ -11,6 +11,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
+                Spacer()
                 ZStack {
                     GeometryReader { geometry in
                         if viewModel.sessionStarted {
@@ -35,7 +36,7 @@ struct ContentView: View {
                     .frame(width: fixedSize, height: fixedSize)
                 }
                 Spacer()
-
+                Spacer()
                 HStack {
                     Button(action: {
                         viewModel.clearPhoto()
@@ -106,7 +107,8 @@ struct ContentView: View {
                 printt("ContentView VStack.onAppear -> startSession")
                 viewModel.startSession()
             }
-            .navigationTitle("Camera")
+            .navigationTitle("Camera!")
+            .background(GradientBackgroundView())
         }
     }
 }

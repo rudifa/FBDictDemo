@@ -70,5 +70,6 @@ struct PhotosView: View {
             .padding()
         }
         .navigationTitle("Saved Photos")
+        .background(GradientBackgroundView())
     }
 }
